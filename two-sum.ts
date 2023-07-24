@@ -24,22 +24,53 @@ Constraints:
 Only one valid answer exists.
 Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity? */
 
-// naive solution
-function twoSum(nums: number[], target: number): number[] {
+// naive solution (O(n^2))
+// function twoSum(nums: number[], target: number): number[] {
 
+//   const result: number[] = [];
+//   // iterate through the input array
+//   for (let i = 0; i < nums.length; i++) {
+//     // iterate through the other indices
+//     for (let j = i + 1; j < nums.length; j++) {
+//       //compare, and push to result
+//       if (nums[i] + nums[j] === target) result.push(i, j);
+//       break;
+//     }
+//   }
+//   return result;
+// };
+
+// sorting solution with two pointers (O(n log n))
+function twoSum(nums: number[], target: number): number[] {
   const result: number[] = [];
-  // iterate through the input array
-  for (let i = 0; i < nums.length; i++) {
-    // iterate through the other indices
-    for (let j = i + 1; j < nums.length; j++) {
-      //compare, and push to result
-      if (nums[i] + nums[j] === target) result.push(i, j);
+  const sortedNums = [...nums].sort((a, b) => a - b);
+
+  let leftPointer = 0;
+  let rightPointer = sortedNums.length - 1;
+
+  for (let i = 0; i < sortedNums.length; i++) {
+    let sum = sortedNums[leftPointer] + sortedNums[rightPointer];
+
+    if (sum === target) {
+      result.push(nums.indexOf(sortedNums[leftPointer]));
+      result.push(nums.lastIndexOf(sortedNums[rightPointer]));
+      return result;
+    } else if (sum < target) {
+      leftPointer++;
+    } else {
+      rightPointer--;
+    }
+
+    if (leftPointer >= rightPointer) {
       break;
     }
   }
+
   return result;
-};
+}
 
 console.log(twoSum([2, 7, 11, 15], 9)); // expect [0, 1]
 console.log(twoSum([3, 2, 4], 6)); // expect [1, 2]
 console.log(twoSum([3, 3], 6)); // expect [0, 1]
+console.log(twoSum([1, 2], 5)); // expect []
+console.log(twoSum([1, 2], 4)); // expect []
