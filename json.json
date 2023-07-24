@@ -1,0 +1,27 @@
+{
+  "title": "Far Out!",
+  "author": "Mark Charles Smith",
+  "size": {
+    "rows": 15,
+    "columns": 15
+  },
+  "clues": [
+    {
+      "key": 1,
+      "direction": "across",
+      "clue": "Horizontal clue 1",
+      "length": 4,
+      "position": {
+        "start": {
+          "row": 2,
+          "column": 1
+        },
+        "end": {
+          "row": 2,
+          "column": 4
+        }
+      },
+      "answer": "WORD"
+    }
+  ]
+}
